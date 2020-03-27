@@ -30,6 +30,7 @@ class Eliza:
         self.initials = []
         self.finals = []
         self.quits = []
+        self.emotions = [] #new emotions set
         self.pres = {}
         self.posts = {}
         self.synons = {}
@@ -59,6 +60,9 @@ class Eliza:
                 elif tag == 'synon':
                     parts = content.split(' ')
                     self.synons[parts[0]] = parts
+                elif tag == 'emotion': #get set of possible emotions
+                    parts = content.split(' ')
+                    self.emotions.append(content)
                 elif tag == 'key':
                     parts = content.split(' ')
                     word = parts[0]
@@ -128,6 +132,8 @@ class Eliza:
                     if punct in insert:
                         insert = insert[:insert.index(punct)]
                 output.extend(insert)
+            elif reword == '<emotion>': #insert random emotion
+                output.append(self.emotion())            
             else:
                 output.append(reword)
         return output
@@ -183,7 +189,14 @@ class Eliza:
         words = self._sub(words, self.pres)
         log.debug('After pre-substitution: %s', words)
 
+        #retrieve emotions from input
+        emotions = [w.lower() for w in words if w.lower() in self.emotions]
+        log.debug('Emotions: %s', emotions)
+
         keys = [self.keys[w.lower()] for w in words if w.lower() in self.keys]
+        if emotions: #add key 'emotion' to key list in case an emotion was mentioned
+            word = 'emotion'
+            keys.append(self.keys[word])
         keys = sorted(keys, key=lambda k: -k.weight)
         log.debug('Sorted keys: %s', [(k.word, k.weight) for k in keys])
 
@@ -210,6 +223,9 @@ class Eliza:
 
     def final(self):
         return random.choice(self.finals)
+    
+    def emotion(self):
+        return random.choice(self.emotions)
 
     def run(self):
         print(self.initial())

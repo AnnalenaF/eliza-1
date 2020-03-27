@@ -78,6 +78,27 @@ synon: will moechte brauche
 synon: traurig ungluecklich depressiv deprimiert niedergeschlagen muede
 synon: gluecklich froehlich froh besser gut
 synon: alle jeder niemand keiner
+emotion: gluecklich
+emotion: wuetend
+emotion: traurig
+emotion: sauer
+emotion: deprimiert
+emotion: niedergeschlagen
+emotion: muede
+emotion: aufgedreht
+emotion: froh
+emotion: froehlich
+emotion: aengstlich
+emotion: veraergert
+emotion: gelangweilt
+emotion: angespannt
+emotion: aufgebracht
+emotion: ausgeglichen
+emotion: einsam
+emotion: heiter
+emotion: nachdenklich
+emotion: nervoes
+emotion: vergnuegt
 key: xnone
   decomp: *
     reasmb: Ich bin nicht sicher, ob ich dich ganz richtig verstanden habe.
@@ -442,4 +463,19 @@ key: aehnlich 10
 key: gleich 10
   decomp: * @sein * gleich *
     reasmb: goto aehnlich
-   
+key: emotion 10
+  decomp: Bist du * ?
+    reasmb: Ja, ich bin (1) .
+  decomp: fuehlst du dich * ?
+    reasmb: Ja, ich fuehle mich (1) .
+  decomp: *
+    reasmb: goto bist
+key: wie 10
+  decomp: wie fuehlst du dich * ?
+    reasmb: Ich bin zur Zeit <emotion> .
+    reasmb: Ich fuehle mich <emotion> .
+    reasmb: Ich bin <emotion> zur Zeit .
+  decomp: wie geht es dir * ?
+    reasmb: Ich bin zur Zeit <emotion> .
+    reasmb: Ich fuehle mich <emotion> .
+    reasmb: Ich bin <emotion> zur Zeit .

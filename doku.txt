@@ -1,0 +1,20 @@
+Aufgabe 1
+1. Entscheidung: 'du' oder 'Sie'? Entscheidung für 'du' um mehr Vertrauen / Nähe zu signalisieren
+2. Identifizierte Probleme:
+    - komplexere Grammatik im Deutschen (vor allem das Konjugieren)
+    - Grad der Höflichkeit möglichst äquivalent zur englischen Version zu treffen
+    - Möglichst wörtlich oder freier übersetzen?
+    - Manche Wörter haben mehrere Bedeutungen je nach Kontext und müssten so anders behandelt werden (Beispiel: ich will Schokolade vs. ich will Schwimmen gehen)
+3. Vorgehen um identifizierte Probleme zu umgehen:
+    - wenn nicht anders möglich: Reassembly Rule wegnehmen oder verallgemeinern ohne Einbeziehen von Referenzen auf Gesagtes
+    - für häufig auftretende Wörter Konjugation in 'pre's aufgenommen
+    - für andere Formen, z.B. mein, meine mehrere keys angelegt
+    - iterativ verbessern und testen
+
+Aufgabe 2
+- Einführen eines neuen Tags 'emotion' um Set verfügbarer Emotionen aufzubauen (das auch beliebig erweiterbar ist), keine Wiederverwendung der vorhandenen 
+  Synonyme, da sie getrennt sind nach positiv und negativ konnotierten Gefühlen
+- Neuer key 'emotion', der bei jeder erwähnten Emotion mit höchstem Gewicht zuerst angesprochen wird. Falls die Reassembly Rules nicht passen wird wie gewohnt
+  verfahren -> danach immer noch Fallback in der vorhandenen Logik; so ist der Kontext sichergestellt, dass über eine Emotion gesprochen wird
+- für die Frage nach dem Befinden: neuer key 'wie' mit höchstem Gewicht, somit können verschiedene Fragen abgefangen werden über die Decomposition Rules
+  und <emotion> kann im Python code dynamisch durch einen random Wert ersetzt werden
