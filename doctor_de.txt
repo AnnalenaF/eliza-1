@@ -30,6 +30,7 @@ pre: ausgeglichen entspannt
 pre: wenn falls
 pre: heiter froehlich
 pre: vergnuegt froehlich
+pre: gluecklich froehlich
 post: bin bist
 post: bist bin
 post: dein mein
@@ -208,30 +209,30 @@ key: vielleicht
     reasmb: Weisst du es nicht ?
 key: name 15
   decomp: *
-    reasmb: Ich interessiere mich nicht fuer Namen.
-    reasmb: Wie ich dir schon gesagt habe, Namen sind mir egal -- bitte fahre fort.
+    reasmb: Ich interessiere mich nicht fuer Namen. <impulse> [-20]
+    reasmb: Wie ich dir schon gesagt habe, Namen sind mir egal -- bitte fahre fort. <impulse> [-20]
 key: namen 15
   decomp: *
     reasmb: goto name
 key: english
   decomp: *
     reasmb: goto xforeign
-    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Englisch.
+    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Englisch. <impulse> [-40]
 key: francais
   decomp: *
     reasmb: goto xforeign
-    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Franzoesisch.
+    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Franzoesisch. <impulse> [-40]
 key: italiano
   decomp: *
     reasmb: goto xforeign
-    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Italienisch.
+    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Italienisch. <impulse> [-40]
 key: espanol
   decomp: *
     reasmb: goto xforeign
-    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Spanisch.
+    reasmb: Ich habe dir bereits gesagt, ich verstehe kein Spanisch. <impulse> [-40]
 key: xforeign
   decomp: *
-    reasmb: Ich spreche nur Deutsch.
+    reasmb: Ich spreche nur Deutsch. <impulse> [-20]
 key: hallo
   decomp: *
     reasmb: Guten Tag.  Bitte erzaehle mir von deinem Problem.
@@ -310,10 +311,10 @@ key: ich
     reasmb: Es ist sicher nicht schoen (3) zu sein .
     reasmb: Kannst du erklaeren was dich dazu gebracht hat (3) zu sein ?
   decomp: * ich bin * @gluecklich *
-    reasmb: Wie habe ich dir geholfen (3) zu sein ?
-    reasmb: Hat dich deine Behandlung (3) gestimmt ?
-    reasmb: Was stimmt dich gerade jetzt (3) ?
-    reasmb: Kannst du erklaeren warum du ploetzlich (3) bist ?
+    reasmb: Wie habe ich dir geholfen (3) zu sein ? <impulse> [50]
+    reasmb: Hat dich deine Behandlung (3) gestimmt ? <impulse> [50]
+    reasmb: Was stimmt dich gerade jetzt (3) ? <impulse> [50]
+    reasmb: Kannst du erklaeren warum du ploetzlich (3) bist ? <impulse> [50]
   decomp: * ich war *
     reasmb: goto war
   decomp: * ich @glaube * ich *
@@ -375,8 +376,8 @@ key: du
     reasmb: Was fuehlst du gerade ?
 key: ja
   decomp: *
-    reasmb: Du scheinst recht positiv zu sein.
-    reasmb: Du bist dir sicher.
+    reasmb: Du scheinst recht positiv zu sein. <impulse> [40]
+    reasmb: Du bist dir sicher. <impulse> [40]
     reasmb: Aha.
     reasmb: Ich verstehe.
 key: sicher
@@ -384,8 +385,8 @@ key: sicher
     reasmb: goto ja
 key: nein
   decomp: *
-    reasmb: Sagst du nein nur im negativ zu sein?
-    reasmb: Du bist ein bisschen negativ.
+    reasmb: Sagst du nein nur im negativ zu sein? <impulse> [-40]
+    reasmb: Du bist ein bisschen negativ. <impulse> [-40]
     reasmb: Warum nicht ?
     reasmb: Warum 'nein' ?
 key: mein 2
@@ -522,10 +523,10 @@ key: emotion 10
     reasmb: goto bist
 key: wie 10
   decomp: wie fuehlst du dich * ?
-    reasmb: Ich bin zur Zeit <emotion> .
-    reasmb: Ich fuehle mich <emotion> .
-    reasmb: Ich bin <emotion> zur Zeit .
+    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> . <impulse> [20]
+    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> . <impulse> [20]
+    reasmb: Ich bin <emotion> .
   decomp: wie geht es dir * ?
-    reasmb: Ich bin zur Zeit <emotion> .
-    reasmb: Ich fuehle mich <emotion> .
-    reasmb: Ich bin <emotion> zur Zeit .
+    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> . <impulse> [20]
+    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> . <impulse> [20]
+    reasmb: Ich bin <emotion> .

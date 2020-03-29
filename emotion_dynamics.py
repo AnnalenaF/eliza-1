@@ -1,4 +1,5 @@
 import random
+from time import sleep
 
 class EmotionalAgent:
     def __init__(self):
