@@ -1,8 +1,4 @@
 import random
-import schedule
-import time
-import threading
-from time import sleep
 
 class EmotionalAgent:
     def __init__(self):
