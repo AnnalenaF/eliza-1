@@ -1,7 +1,10 @@
 import logging
 import random
 import re
+from emotion_dynamics import EmotionalAgent
 from collections import namedtuple
+import threading
+from time import sleep
 
 # Fix Python2/Python3 incompatibility
 try: input = raw_input
@@ -24,18 +27,19 @@ class Decomp:
         self.reasmbs = reasmbs
         self.next_reasmb_index = 0
 
-
 class Eliza:
     def __init__(self):
         self.initials = []
         self.finals = []
         self.quits = []
-        self.emotions = [] #new emotions set
+        self.emotions = [] #new emotions list
+        self.emotionTriggers = {} #new emotion triggers to send impulses to wasabi
         self.pres = {}
         self.posts = {}
         self.synons = {}
         self.keys = {}
         self.memory = []
+        self.emotionalEliza = EmotionalAgent()
 
     def load(self, path):
         key = None
@@ -63,6 +67,12 @@ class Eliza:
                 elif tag == 'emotion': #get set of possible emotions
                     parts = content.split(' ')
                     self.emotions.append(content)
+                elif tag == 'emotionTrigger': #get set of emotional triggers
+                    parts = content.split(' ')
+                    word = parts[0]
+                    impulse = parts[1]
+                    emotionTrigger = (word, impulse)
+                    self.emotionTriggers[word] = emotionTrigger
                 elif tag == 'key':
                     parts = content.split(' ')
                     word = parts[0]
@@ -120,8 +130,17 @@ class Eliza:
 
     def _reassemble(self, reasmb, results):
         output = []
+        #evaluate whether questioned emotion is true or not and response accordingly
+        if '<emotion_response>' in reasmb:
+            current_emotion = self.emotion()
+            if current_emotion in self.input_emotions:
+                output.append("Ja,")
+            else: 
+                output.append("Nein,")
+                index = reasmb.index('(1)')
+                reasmb[index] = current_emotion
         for reword in reasmb:
-            if not reword:
+            if not reword or reword == '<emotion_response>':
                 continue
             if reword[0] == '(' and reword[-1] == ')':
                 index = int(reword[1:-1])
@@ -132,8 +151,8 @@ class Eliza:
                     if punct in insert:
                         insert = insert[:insert.index(punct)]
                 output.extend(insert)
-            elif reword == '<emotion>': #insert random emotion
-                output.append(self.emotion())            
+            elif reword == '<emotion>': #insert current emotion
+                output.append(self.emotion())  
             else:
                 output.append(reword)
         return output
@@ -167,6 +186,28 @@ class Eliza:
                 log.debug('Goto key: %s', goto_key)
                 return self._match_key(words, self.keys[goto_key])
             output = self._reassemble(reasmb, results)
+
+            #retrieve emotional triggers from input
+            emotionalTriggers = [w.lower() for w in words if w.lower() in self.emotionTriggers]
+            log.debug('Emotional Triggers: %s', [(t[0], t[1]) for t in emotionalTriggers])
+            #accumulate and send emotional impulses
+            impulse = 0 
+            for t in emotionalTriggers:
+                impulse = impulse + float(self.emotionTriggers[t][1])
+            if impulse != 0:
+                emotion_before_impulse = self.emotion()
+                self.emotionalEliza.emotional_impulse(impulse)
+                self.emotionalEliza.update_emotions()
+                emotion_after_impulse = self.emotion()
+                #tell user emotional state after impulse
+                if emotion_after_impulse != emotion_before_impulse: #emotion changed after impulse
+                    output.append("Das macht mich " + self.emotion())
+                else: #emotion has not changed
+                    output.append("Ich bin immer noch " + emotion_before_impulse) 
+           # FOR TESTING: always tell current emotional state
+           # else:
+           #     output.append("Ich bin gerade " + self.emotion())
+
             if decomp.save:
                 self.memory.append(output)
                 log.debug('Saved to memory: %s', output)
@@ -190,11 +231,11 @@ class Eliza:
         log.debug('After pre-substitution: %s', words)
 
         #retrieve emotions from input
-        emotions = [w.lower() for w in words if w.lower() in self.emotions]
-        log.debug('Emotions: %s', emotions)
+        self.input_emotions = [w.lower() for w in words if w.lower() in self.emotions]
+        log.debug('Emotions: %s', self.input_emotions)
 
         keys = [self.keys[w.lower()] for w in words if w.lower() in self.keys]
-        if emotions: #add key 'emotion' to key list in case an emotion was mentioned
+        if self.input_emotions: #add key 'emotion' to key list in case an emotion was mentioned
             word = 'emotion'
             keys.append(self.keys[word])
         keys = sorted(keys, key=lambda k: -k.weight)
@@ -225,7 +266,8 @@ class Eliza:
         return random.choice(self.finals)
     
     def emotion(self):
-        return random.choice(self.emotions)
+        return self.emotionalEliza.get_emotion() #retrieve emotion from wasabi module
+       # return random.choice(self.emotions) random emotion for task 2
 
     def run(self):
         print(self.initial())
@@ -244,6 +286,11 @@ class Eliza:
 
 def main():
     eliza = Eliza()
+    #start thread continuously updating Eliza's emotions
+    t = threading.Thread(target=eliza.emotionalEliza.update_emotions_continuously)
+    t.daemon = True
+    t.start()
+
     eliza.load('doctor_de.txt')
     eliza.run()
 

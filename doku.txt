@@ -18,3 +18,11 @@ Aufgabe 2
   verfahren -> danach immer noch Fallback in der vorhandenen Logik; so ist der Kontext sichergestellt, dass über eine Emotion gesprochen wird
 - für die Frage nach dem Befinden: neuer key 'wie' mit höchstem Gewicht, somit können verschiedene Fragen abgefangen werden über die Decomposition Rules
   und <emotion> kann im Python code dynamisch durch einen random Wert ersetzt werden
+
+Aufgabe 3
+1. höherer Grad an Immersion; Gefühle werden gespiegelt, Antworten passen besser?
+2.
+3.
+4. neuer Tag 'emotionTrigger' > Wörter die gewisse Emotionen in Eliza hervorrufen, kombiniert mit Impuls
+5. Frage nach Gemüt kann "richtig" beantwortet werden; rasmb rules haben auch emotionen zugeordnet > zuerst die mit emotion dann die anderen; 
+   Stimmung bei Konversation mit "das macht mich XY" mitteilen o.ä. (nur wenn sich emotion geändert hat?)

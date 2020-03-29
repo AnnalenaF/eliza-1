@@ -23,7 +23,13 @@ pre: jo ja
 pre: jup ja
 pre: jop ja
 pre: sorry entschuldigung
+pre: sauer wuetend
+pre: niedergeschlagen traurig
+pre: veraergert wuetend
+pre: ausgeglichen entspannt
 pre: wenn falls
+pre: heiter froehlich
+pre: vergnuegt froehlich
 post: bin bist
 post: bist bin
 post: dein mein
@@ -78,27 +84,71 @@ synon: will moechte brauche
 synon: traurig ungluecklich depressiv deprimiert niedergeschlagen muede
 synon: gluecklich froehlich froh besser gut
 synon: alle jeder niemand keiner
-emotion: gluecklich
 emotion: wuetend
 emotion: traurig
-emotion: sauer
 emotion: deprimiert
-emotion: niedergeschlagen
-emotion: muede
-emotion: aufgedreht
-emotion: froh
 emotion: froehlich
 emotion: aengstlich
-emotion: veraergert
 emotion: gelangweilt
-emotion: angespannt
-emotion: aufgebracht
-emotion: ausgeglichen
-emotion: einsam
-emotion: heiter
-emotion: nachdenklich
-emotion: nervoes
-emotion: vergnuegt
+emotion: genervt
+emotion: entspannt
+emotion: ueberrascht
+emotion: erschrocken
+emotion: neutral
+emotionTrigger: scheisse -100
+emotionTrigger: doof -70
+emotionTrigger: gestank -60
+emotionTrigger: stinkst -90
+emotionTrigger: schoen 50
+emotionTrigger: nett 30
+emotionTrigger: huebsch 60
+emotionTrigger: toll 70
+emotionTrigger: freundlich 50
+emotionTrigger: super 60
+emotionTrigger: genial 100
+emotionTrigger: intelligent 70
+emotionTrigger: symphatisch 80
+emotionTrigger: liebevoll 60
+emotionTrigger: bescheiden 30
+emotionTrigger: respektvoll 40
+emotionTrigger: ordentlich 20
+emotionTrigger: attraktiv 75
+emotionTrigger: hilfsbereit 50
+emotionTrigger: verlässlich 30
+emotionTrigger: geduldig 30
+emotionTrigger: ehrlich 80
+emotionTrigger: witzig 50
+emotionTrigger: ausgeglichen 20
+emotionTrigger: angenehm 50
+emotionTrigger: störrisch -50
+emotionTrigger: voreilig -30
+emotionTrigger: bösartig -60
+emotionTrigger: grausam -80
+emotionTrigger: unaufmerksam -20
+emotionTrigger: schadenfreudig -30
+emotionTrigger: eitel -30
+emotionTrigger: chaotisch -50
+emotionTrigger: gierig -70
+emotionTrigger: agressiv -25
+emotionTrigger: unangenehm -20
+emotionTrigger: misstrauisch -30
+emotionTrigger: egoistisch -60
+emotionTrigger: frech -10
+emotionTrigger: bescheuert -80
+emotionTrigger: rücksichtslos -20
+emotionTrigger: scheu -5
+emotionTrigger: manipulativ -20
+emotionTrigger: idiot -100
+emotionTrigger: depp -90
+emotionTrigger: arsch -90
+emotionTrigger: arschloch -90
+emotionTrigger: dumm -70
+emotionTrigger: bloed -70
+emotionTrigger: bloede -70
+emotionTrigger: kuh -40
+emotionTrigger: dummbabbler -20
+emotionTrigger: schokolade 100
+emotionTrigger: trump -90
 key: xnone
   decomp: *
     reasmb: Ich bin nicht sicher, ob ich dich ganz richtig verstanden habe.
@@ -465,9 +515,9 @@ key: gleich 10
     reasmb: goto aehnlich
 key: emotion 10
   decomp: Bist du * ?
-    reasmb: Ja, ich bin (1) .
+    reasmb: <emotion_response> ich bin (1) .
   decomp: fuehlst du dich * ?
-    reasmb: Ja, ich fuehle mich (1) .
+    reasmb: <emotion_response> ich fuehle mich (1) .
   decomp: *
     reasmb: goto bist
 key: wie 10
