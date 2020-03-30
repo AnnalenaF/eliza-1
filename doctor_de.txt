@@ -61,6 +61,8 @@ post: mir dir
 post: dir mir
 post: habe hast
 post: hast habe
+post: war warst
+post: warst war
 post: waere waerst
 post: waerst waere
 post: wuensche wuenschst
@@ -114,6 +116,8 @@ emotion: ueberrascht
 emotion: erschrocken
 emotion: neutral
 emotionTrigger: scheisse -100
+emotionTrigger: hasse -90
+emotionTrigger: liebe 100
 emotionTrigger: doof -70
 emotionTrigger: gestank -60
 emotionTrigger: stinkst -90
@@ -298,8 +302,8 @@ key: dein
     reasmb: Wirklich, mein (2) ?
 key: deine
   decomp: * deine *
+    reasmb: Wirklich, meine (2) ?
     reasmb: Beunruhigt dich jemand anderes' (2) ? <no_trigger>
-    reasmb: Wirklich, meine (2)?
 key: war 2
   decomp: * war ich *
     reasmb: Was wenn du (2) warst ? <no_trigger>
@@ -407,7 +411,7 @@ key: sicher
     reasmb: goto ja
 key: nein
   decomp: *
-    reasmb: Sagst du nein nur im negativ zu sein? <no_trigger> <impulse> [-40,-100]
+    reasmb: Sagst du nein nur um negativ zu sein? <no_trigger> <impulse> [-40,-100]
     reasmb: Du bist ein bisschen negativ. <no_trigger> <impulse> [-40,-100]
     reasmb: Warum nicht ? <no_trigger>
     reasmb: Warum 'nein' ? <no_trigger>
@@ -553,10 +557,10 @@ key: emotion 10
     reasmb: goto bist
 key: wie 10
   decomp: wie fuehlst du dich * ?
-    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> .
-    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> .
-    reasmb: Ich bin <emotion> .
+    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> . <no_trigger>
+    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> . <no_trigger>
+    reasmb: Ich bin <emotion> . <no_trigger>
   decomp: wie geht es dir * ?
-    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> .
-    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> .
-    reasmb: Ich bin <emotion> .
+    reasmb: Danke der Nachfrage, ich bin zur Zeit <emotion> . <no_trigger>
+    reasmb: Nett, dass du fragst, ich fuehle mich <emotion> . <no_trigger>
+    reasmb: Ich bin <emotion> . <no_trigger>

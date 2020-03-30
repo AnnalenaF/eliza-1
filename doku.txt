@@ -42,24 +42,26 @@ Ebenso kann durch die gezielte Wahl der Sprache Konfliktpotential reduziert werd
 (Beispielsweise angry anstelle von wütend mit ärgerlich übersetzen)
 
 3. Welche Ein-/Ausgabedaten zwischen dem ELIZA-System und der WASABI-Komponente müssen implementiert werden, wenn WASABI als eigenständiges C++-Programm parallel zum PythonCode ausgeführt würde?
-Ausgabe ELIZA -> Eingabe WASABI
+Ausgabe ELIZA -> Eingabe WASABI:
 Emotionsimpuls zwischen -100 und 100 sowie die Dominanz. Gegebenenfalls kann hier auch die Konfiguration der Emotionsdynamik für die zu simulierende Person (Attendee) übergeben werden.
-Ausgabe WASABI -> Eingabe ELIZA
+Ausgabe WASABI -> Eingabe ELIZA:
 Entweder: Tripel an Werten als Repräsentation der aktuellen Position im PAD-Space
 Oder: Die aktuelle Emotion repräsentiert durch ein Wort
 
 4. Wie werden im Python-Code sinnvoll Emotionsimpulse aus den Interaktionsdaten abgeleitet, die dann als Eingabedaten für die Emotionsdynamik an WASABI geschickt werden können?
-neuer Tag 'emotionTrigger' > Wörter die gewisse Emotionen in Eliza hervorrufen, kombiniert mit Impuls
-Durch das Anlegen eines neuen Tags 'emotionTrigger' können Emotionsimpulse aus Wörtern abgeleitet werden.
-Der Tag emotionTrigger ist dabei die Verbindung eines Wortes mit einem spezifischen, dem Wort zugeordneten Emotionsimpuls.
-Dieser liegt zwischen -100 für besonders negative und +100 für besonders positive Werte.
-TODO: Hier noch den Code durchgehen und nötiges Ergänzen
+Durch einen neuen Tag ('emotionTrigger') in der doctor_de.txt können Wörter gekennzeichnet werden, die gewisse Emotionen in Eliza hervorrufen. Ihnen können hier auch 
+die dazugehörigen emotionalen Impulse (Zahl zwischen -100 und 100) zugeordnet werden.
+Weitere Logik kann in den Reassembly Rules durch Tags z.B. der Form <emotion> implementiert werden. Die Reassembly Rule kann nach bestimmten Tags durchsucht
+und dementsprechende Logik durchgeführt werden. Diese Tags können für viele Zwecke genutzt werden:
+- <impulse> [i,d]: Senden eines Impulses, der den Wert beträgt der nach dem Tag steht, ggf. kombiniert mit einem Dominanzwert der hier mit aufgeführt ist
+- <emotion>: einfügen der aktuellen Emotion an dieser Stelle
+- <sorry>: senden eines positiven Impulses falls Eliza aktuell wütend oder genervt ist
+- <no_trigger> / <no_pos_trigger> / <no_neg_trigger>: verhindern, dass auf emotionTrigger allgemein, oder nur solche von positivem oder negativem Wert reagiert wird
+- <switch>: umkehren des Impulsvorzeichens, falls ein Impuls getriggert wurde (z.B. bei Key 'niemand')
+- <emotion_response>: Kennzeichnung einer Frage nach dem Befinden von Eliza, löst dementsprechende Antwortlogik aus
 
 5. Wie nutzt der Python-ELIZA-Code die von WASABI erzeugten Emotionen, um die Antworten systematisch und sinnvoll zu modifizieren? (Nennen Sie hier mindestens zwei Alternativen.)
-Zuallererst kann die Frage nach dem aktuellen Gemütszustand korrekt beantwortet werden.
-Ändert sich der Gemütszustand von ELIZA durch eine Eingabe des Benutzers, kann diese Änderung in der Antwort mitgeteilt werden. (Das stimmt mich <Emotion>)
-Wird ein Emotionsimpuls gesendet, löst jedoch keine Änderung der empfundenen Emotion aus, kann dies dennoch dem Benutzer mitgeteilt werden. (Ich bin immernoch <Emotion>)
-Ein Emotionsimpuls kann durch bestimmte Triggerworte (z.B. doof, huebsch) ausgelöst werden, sowie durch bestimmte Reassembly Rules.
-
-Eine andere Möglichkeit besteht darin Reassembly Rules einen Emotionswert zuzuordnen und sie gemäß des Gemütszustandes von ELIZA auszuwählen.
-TODO: was du schaffst
+- Die Frage nach dem aktuellen Gemütszustand kann korrekt beantwortet werden.
+- Ändert sich der Gemütszustand von ELIZA durch eine Eingabe des Benutzers, kann diese Änderung in der Antwort mitgeteilt werden. (z.B.: Das stimmt mich <emotion>)
+- Wird ein Emotionsimpuls gesendet, löst jedoch keine Änderung der empfundenen Emotion aus, kann dies auch dem Benutzer mitgeteilt werden. (z.B.: Ich bin immernoch <emotion>)
+- Eine andere Möglichkeit besteht darin, Reassembly Rules einen Emotionswert zuzuordnen und sie gemäß des Gemütszustandes von ELIZA auszuwählen.

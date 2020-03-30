@@ -307,6 +307,7 @@ class Eliza:
        # return random.choice(self.emotions)  # random emotion for task 2
 
     def send_impulse(self, impulse, dominance=100):
+        output = ''
         emotion_before_impulse = self.emotion()
         self.emotional_eliza.emotional_impulse(impulse)
         self.emotional_eliza.set_dominance(dominance)
