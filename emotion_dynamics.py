@@ -153,9 +153,9 @@ class EmotionConverter(object):
         self.__outer_radius = 0.8
         self.__inner_radius = 0.4
         self.__s = 'entspannt'
-        self.__actual_string_convert_element = ['entspannt', (0, 0, 1.0)]
+        self.__actual_string_convert_element = ['entspannt', (0.0, 0.0, 1.0)]
         self.__string_convert_list = list() # <(category, [P,A,D]), ..>
-        temp_list = ['wuetend', (-0.8, 0.8, 1.0)]
+        temp_list = ['aergerlich', (-0.8, 0.8, 1.0)]
         self.__string_convert_list.append(temp_list)
         temp_list = ['aengstlich', (-0.8, 0.8, -1.0)]
         self.__string_convert_list.append(temp_list)
@@ -172,18 +172,16 @@ class EmotionConverter(object):
         temp_list = ['froehlich', (0.8, 0.8, -1.0)]
         self.__string_convert_list.append(temp_list)
         temp_list = ['entspannt', (0.0, 0.0, 1.0)]
-      #  self.__string_convert_list.append(temp_list)
-      #  temp_list = ['entspannt', (0.0, 0.0, -1.0)]
         self.__string_convert_list.append(temp_list)
-        temp_list = ['traurig', (0.0, 0.0, -1.0)]
+        temp_list = ['entspannt', (0.0, 0.0, -1.0)]
         self.__string_convert_list.append(temp_list)
         temp_list = ['ueberrascht', (0.1, 0.8, 1.0)]
         self.__string_convert_list.append(temp_list)
         temp_list = ['erschrocken', (0.1, 0.8, -1.0)]
         self.__string_convert_list.append(temp_list)
-        temp_list = ['gelangweilt', (-0.5, 0.0, 1.0)]
+        temp_list = ['gelangweilt', (0, -0.8, 1.0)]
         self.__string_convert_list.append(temp_list)
-        temp_list = ['deprimiert', (-0.8, 0.0, -1.0)]
+        temp_list = ['deprimiert', (0, -0.8, -1.0)]
         self.__string_convert_list.append(temp_list)
         temp_list = ['neutral', (0.0, 0.0, 0.0)]
         self.__string_convert_list.append(temp_list)

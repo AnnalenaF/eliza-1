@@ -22,10 +22,18 @@ pre: nope nein
 pre: jo ja
 pre: jup ja
 pre: jop ja
+pre: hab habe
+pre: ich's ich es
+pre: ichs ich es
+pre: du's du es
+pre: dus du es
+pre: find finde
+pre: denk denke
 pre: sorry entschuldigung
-pre: sauer wuetend
+pre: wuetend aergerlich
+pre: sauer aergerlich
 pre: niedergeschlagen traurig
-pre: veraergert wuetend
+pre: veraergert aergerlich
 pre: ausgeglichen entspannt
 pre: wenn falls
 pre: heiter froehlich
@@ -35,12 +43,16 @@ post: bin bist
 post: bist bin
 post: dein mein
 post: deine meine
+post: deinen meinen
+post: deinem meinem
 post: mich dich
 post: dich mich
 post: ich du
 post: du ich
 post: mein dein
 post: meine deine
+post: meinen deinen
+post: meinem deinem
 post: wir ihr
 post: ihr wir
 post: hasse hasst
@@ -65,6 +77,8 @@ post: habe hast
 post: hast habe
 post: mag magst
 post: magst mag
+post: finde findest
+post: findest finde
 post: hatte hattest
 post: hattest hatte
 post: muss musst
@@ -79,13 +93,16 @@ post: gehst gehe
 post: gehe gehst
 post: hoere hoerst
 post: hoerst hoere
+post: denke denkst
+post: denkst denke
 synon: glaube denke fuehle wuensche wunsch
 synon: familie mutter mama vater papa schwester bruder ehefrau frau kinder kind
 synon: will moechte brauche
 synon: traurig ungluecklich depressiv deprimiert niedergeschlagen muede
 synon: gluecklich froehlich froh besser gut
 synon: alle jeder niemand keiner
-emotion: wuetend
+synon: sein bin bist ist seid sind
+emotion: aergerlich
 emotion: traurig
 emotion: deprimiert
 emotion: froehlich
@@ -115,15 +132,15 @@ emotionTrigger: respektvoll 40
 emotionTrigger: ordentlich 20
 emotionTrigger: attraktiv 75
 emotionTrigger: hilfsbereit 50
-emotionTrigger: verlässlich 30
+emotionTrigger: verlaesslich 30
 emotionTrigger: geduldig 30
 emotionTrigger: ehrlich 80
 emotionTrigger: witzig 50
 emotionTrigger: ausgeglichen 20
 emotionTrigger: angenehm 50
-emotionTrigger: störrisch -50
+emotionTrigger: stoerrisch -50
 emotionTrigger: voreilig -30
-emotionTrigger: bösartig -60
+emotionTrigger: boesartig -60
 emotionTrigger: grausam -80
 emotionTrigger: unaufmerksam -20
 emotionTrigger: schadenfreudig -30
@@ -136,7 +153,7 @@ emotionTrigger: misstrauisch -30
 emotionTrigger: egoistisch -60
 emotionTrigger: frech -10
 emotionTrigger: bescheuert -80
-emotionTrigger: rücksichtslos -20
+emotionTrigger: ruecksichtslos -20
 emotionTrigger: scheu -5
 emotionTrigger: manipulativ -20
 emotionTrigger: idiot -100
@@ -158,12 +175,17 @@ key: xnone
     reasmb: Ist es dir sehr wichtig solche Dinge zu besprechen ?
 key: entschuldigung
   decomp: *
-    reasmb: Bitte entschuldige dich nicht.
-    reasmb: Es ist nicht noetig sich zu entschuldigen.
-    reasmb: Ich habe dir gesagt, du musst dich nicht entschuldigen.
+    reasmb: Du brauchst dich nicht entschuldigen. <sorry>
+    reasmb: Es ist nicht noetig sich zu entschuldigen. <sorry>
+    reasmb: Ich habe dir gesagt, du musst dich nicht entschuldigen. <sorry>
 key: entschuldige
   decomp: *
     reasmb: goto entschuldigung
+key: entschuldigt
+  decomp: * ich * mich * entschuldigt
+    reasmb: Bitte entschuldige dich nicht.
+    reasmb: Es ist nicht noetig sich zu entschuldigen.
+    reasmb: Ich habe dir gesagt, du musst dich nicht entschuldigen.
 key: leid
   decomp: * tut mir * leid *
     reasmb: goto entschuldigung
@@ -247,27 +269,27 @@ key: computer 50
     reasmb: Was denkst du ueber Maschinen ?
 key: bin
   decomp: * bin ich * ?
-    reasmb: Glaubst du du bist (2) ?
-    reasmb: Waerst du gerne (2) ?
-    reasmb: Wuenschst du dir ich wuerde dir sagen, dass du (2) bist ?
-    reasmb: Was wuerde es bedeuten wenn du (2) waerst ?
+    reasmb: Glaubst du du bist (2) ? <no_trigger>
+    reasmb: Waerst du gerne (2) ? <no_trigger>
+    reasmb: Wuenschst du dir ich wuerde dir sagen, dass du (2) bist ? <no_trigger>
+    reasmb: Was wuerde es bedeuten wenn du (2) waerst ? <no_trigger>
     reasmb: goto was
   decomp: *
     reasmb: Warum sagst du 'bin' ?
     reasmb: Ich verstehe das nicht.
 key: bist
   decomp: * bist du * ?
-    reasmb: Warum interessiert es dich, ob ich (2) bin oder nicht ?
-    reasmb: Waere es dir lieber ich waere nicht (2) ?
-    reasmb: Vielleicht bin ich (2) in deinen Fantasien.
-    reasmb: Denkst du manchmal ich bin (2) ?
+    reasmb: Warum interessiert es dich, ob ich (2) bin oder nicht ? <no_pos_trigger>
+    reasmb: Waere es dir lieber ich waere nicht (2) ? <no_pos_trigger>
+    reasmb: Vielleicht bin ich (2) in deinen Fantasien. <no_pos_trigger>
+    reasmb: Denkst du manchmal ich bin (2) ? <no_pos_trigger>
     reasmb: goto was
 key: sind
   decomp: * sind *
-    reasmb: Hast du gedacht sie waeren vielleicht nicht (2) ?
-    reasmb: Faendest du es gut wenn sie nicht (2) waeren ?
-    reasmb: Was wenn sie nicht (2) waeren ?
-    reasmb: Womoeglich sind sie (2) .
+    reasmb: Hast du gedacht sie waeren vielleicht nicht (2) ? <no_trigger>
+    reasmb: Faendest du es gut wenn sie nicht (2) waeren ? <no_trigger>
+    reasmb: Was wenn sie nicht (2) waeren ? <no_trigger>
+    reasmb: Womoeglich sind sie (2) . <no_trigger>
 key: dein
   decomp: * dein *
     reasmb: Warum beschaeftigt dich mein (2) ?
@@ -276,20 +298,20 @@ key: dein
     reasmb: Wirklich, mein (2) ?
 key: deine
   decomp: * deine *
-    reasmb: Beunruhigt dich jemand anderes' (2) ?
+    reasmb: Beunruhigt dich jemand anderes' (2) ? <no_trigger>
     reasmb: Wirklich, meine (2)?
 key: war 2
   decomp: * war ich *
-    reasmb: Was wenn du (2) warst ?
-    reasmb: Denkst du du warst (2) ?
-    reasmb: Warst du (2) ?
-    reasmb: Was wuerde es bedeuten wenn du (2) warst ?
-    reasmb: Was suggeriert dir (2) ?
+    reasmb: Was wenn du (2) warst ? <no_trigger>
+    reasmb: Denkst du du warst (2) ? <no_trigger>
+    reasmb: Warst du (2) ? <no_trigger>
+    reasmb: Was wuerde es bedeuten wenn du (2) warst ? <no_trigger>
+    reasmb: Was suggeriert dir (2) ? <no_trigger>
     reasmb: goto was
   decomp: * ich war *
-    reasmb: Warst du das wirklich ?
-    reasmb: Warum erzaehlst du mir jetzt du warst (2) ?
-    reasmb: Vielleicht weiss ich schon, dass du (2) warst.
+    reasmb: Warst du das wirklich ? <no_trigger>
+    reasmb: Warum erzaehlst du mir jetzt du warst (2) ? <no_trigger>
+    reasmb: Vielleicht weiss ich schon, dass du (2) warst. <no_trigger>
 key: warst 2
   decomp: * warst du * ?
     reasmb: Wuerdest du gerne glauben ich war (2) ?
@@ -300,49 +322,49 @@ key: warst 2
 key: ich
   decomp: * ich @will *
     reasmb: Was wuerde es fuer dich bedeuten wenn sich dieser Wunsch erfuellen wuerde ?
-    reasmb: Warum wünschst du dir das ?
+    reasmb: Warum wuenschst du dir das ?
     reasmb: Nimm an, dieser Wunsch wuerde sich bald erfuellen ?
     reasmb: Was wenn sich dieser Wunsch niemals erfuellt ?
     reasmb: Was wuerde es fuer dich bedeuten wenn sich dieser Wunsch erfuellt ?
     reasmb: Was hat dein Wunsch mit dieser Diskussion zu tun ?
   decomp: * ich bin * @traurig *
-    reasmb: Es tut mir leid zu hoeren, dass du (3) bist. <impulse> [-50,-100]
-    reasmb: Denkst du hierher zu kommen wird dir helfen nicht mehr (3) zu sein ? <impulse> [-50,-100]
-    reasmb: Es ist sicher nicht schoen (3) zu sein . <impulse> [-50,-100]
-    reasmb: Kannst du erklaeren was dich dazu gebracht hat (3) zu sein ? <impulse> [-50,-100]
+    reasmb: Es tut mir leid zu hoeren, dass du (3) bist. <no_trigger> <impulse> [-50,-100]
+    reasmb: Denkst du hierher zu kommen wird dir helfen nicht mehr (3) zu sein ? <no_trigger> <impulse> [-50,-100]
+    reasmb: Es ist sicher nicht schoen (3) zu sein . <no_trigger> <impulse> [-50,-100]
+    reasmb: Kannst du erklaeren was dich dazu gebracht hat (3) zu sein ? <no_trigger> <impulse> [-50,-100]
   decomp: * ich bin * @gluecklich *
-    reasmb: Wie habe ich dir geholfen (3) zu sein ? <impulse> [50,100]
-    reasmb: Hat dich deine Behandlung (3) gestimmt ? <impulse> [50,100]
-    reasmb: Was stimmt dich gerade jetzt (3) ? <impulse> [50,100]
-    reasmb: Kannst du erklaeren warum du ploetzlich (3) bist ? <impulse> [50,100]
+    reasmb: Wie habe ich dir geholfen (3) zu sein ? <no_trigger> <impulse> [50,100]
+    reasmb: Hat dich deine Behandlung (3) gestimmt ? <no_trigger> <impulse> [50,100]
+    reasmb: Was stimmt dich gerade jetzt (3) ? <no_trigger> <impulse> [50,100]
+    reasmb: Kannst du erklaeren warum du ploetzlich (3) bist ? <no_trigger> <impulse> [50,100]
   decomp: * ich war *
     reasmb: goto war
   decomp: * ich @glaube * ich *
-    reasmb: Denkst du das wirklich ?
-    reasmb: Aber du bist nicht sicher, dass du (4) .
-    reasmb: Zweifelst du wirklich daran, dass du (4) ?
+    reasmb: Denkst du das wirklich ? <no_trigger>
+    reasmb: Aber du bist nicht sicher, dass du (4) . <no_trigger>
+    reasmb: Zweifelst du wirklich daran, dass du (4) ? <no_trigger>
   decomp: * ich * @glaube * du *
     reasmb: goto du
   decomp: * ich bin *
-    reasmb: Bist du zu mir gekommen, weil du (2) bist ?
-    reasmb: Wie lange bist du schon (2) ?
-    reasmb: Denkst du es ist normal (2) zu sein ?
-    reasmb: Geniesst du es (2) zu sein ?
+    reasmb: Bist du zu mir gekommen, weil du (2) bist ? <no_trigger>
+    reasmb: Wie lange bist du schon (2) ? <no_trigger>
+    reasmb: Denkst du es ist normal (2) zu sein ? <no_trigger>
+    reasmb: Geniesst du es (2) zu sein ? <no_trigger>
   decomp: * ich kann nicht *
-    reasmb: Warum denkst du du kannst nicht (2) ?
-    reasmb: Hast du es probiert ?
-    reasmb: Vielleicht koenntest du jetzt (2) .
-    reasmb: Willst du wirklich (2) koennen?
-  decomp: * ich * nicht *
-    reasmb: Wirklich nicht ?
-    reasmb: Warum nicht ?
-    reasmb: Wuenschst du dir du koenntest es ?
-    reasmb: Bekuemmert dich das ?
+    reasmb: Warum denkst du du kannst nicht (2) ? <no_trigger>
+    reasmb: Hast du es probiert ? <no_trigger>
+    reasmb: Vielleicht koenntest du jetzt (2) . <no_trigger>
+    reasmb: Willst du wirklich (2) koennen? <no_trigger>
+  decomp: * ich * nicht * <no_trigger>
+    reasmb: Wirklich nicht ? <no_trigger>
+    reasmb: Warum nicht ? <no_trigger>
+    reasmb: Wuenschst du dir du koenntest es ? <no_trigger>
+    reasmb: Bekuemmert dich das ? <no_trigger>
   decomp: * ich fuehle mich *
-    reasmb: Erzaehle mir mehr ueber solche Gefuehle.
-    reasmb: Fuehlst du dich oft (2) ?
-    reasmb: Geniesst du es dich (2) zu fuehlen ?
-    reasmb: An was erinnert es dich wenn du dich (2) fuehlst ?
+    reasmb: Erzaehle mir mehr ueber solche Gefuehle. <no_trigger>
+    reasmb: Fuehlst du dich oft (2) ? <no_trigger>
+    reasmb: Geniesst du es dich (2) zu fuehlen ? <no_trigger>
+    reasmb: An was erinnert es dich wenn du dich (2) fuehlst ? <no_trigger>
   decomp: * ich * dich *
     reasmb: Vielleicht in deinen Fantasien.
     reasmb: Wuenschst du dir das ?
@@ -367,7 +389,7 @@ key: du
     reasmb: Warum denkst du das ?
     reasmb: Wirklich ?
     reasmb: Wuenschst du dir das zu glauben ?
-    reasmb: Nimm an es wäre so -- was wuerde das bedeuten ?
+    reasmb: Nimm an es waere so -- was wuerde das bedeuten ?
     reasmb: Glaubt jemand anderes das ?
   decomp: * du *
     reasmb: Wir reden hier ueber dich -- nicht mich.
@@ -376,8 +398,8 @@ key: du
     reasmb: Was fuehlst du gerade ?
 key: ja
   decomp: *
-    reasmb: Du scheinst recht positiv zu sein. <impulse> [40,100]
-    reasmb: Du bist dir sicher. <impulse> [40,100]
+    reasmb: Du scheinst recht positiv zu sein. <no_trigger> <impulse> [40,100]
+    reasmb: Du bist dir sicher. <no_trigger> <impulse> [40,100]
     reasmb: Aha.
     reasmb: Ich verstehe.
 key: sicher
@@ -385,10 +407,10 @@ key: sicher
     reasmb: goto ja
 key: nein
   decomp: *
-    reasmb: Sagst du nein nur im negativ zu sein? <impulse> [-40,-100]
-    reasmb: Du bist ein bisschen negativ. <impulse> [-40,-100]
-    reasmb: Warum nicht ?
-    reasmb: Warum 'nein' ?
+    reasmb: Sagst du nein nur im negativ zu sein? <no_trigger> <impulse> [-40,-100]
+    reasmb: Du bist ein bisschen negativ. <no_trigger> <impulse> [-40,-100]
+    reasmb: Warum nicht ? <no_trigger>
+    reasmb: Warum 'nein' ? <no_trigger>
 key: mein 2
   decomp: $ * mein *
     reasmb: Lass uns weiter darueber reden warum dein (2) .
@@ -412,7 +434,7 @@ key: mein 2
     reasmb: Ist es wichtig, dass dein (2) ?
 key: meine 2
   decomp: $ * meine *
-    reasmb: Lass uns weiter über das Warum reden warum deine (2) .
+    reasmb: Lass uns weiter ueber das Warum reden warum deine (2) .
     reasmb: Du hast vorhin erwaehnt, dass deine (2) .
     reasmb: Aber deine (2) .
     reasmb: Hat das irgendwas damit zu tun, dass deine (2) ?
@@ -439,21 +461,21 @@ key: kannst
     reasmb: Vielleicht wuerdest du selbst gerne (2) koennen.
 key: kann
   decomp: * kann ich * ?
-    reasmb: Ob du (2) kannst kommt mehr auf dich an als auf mich.
-    reasmb: Wuerdest du gerne (2) koennen ?
-    reasmb: Vielleicht willst du nicht (2) .
+    reasmb: Ob du (2) kannst kommt mehr auf dich an als auf mich. <no_trigger>
+    reasmb: Wuerdest du gerne (2) koennen ? <no_trigger>
+    reasmb: Vielleicht willst du nicht (2) . <no_trigger>
     reasmb: goto was
 key: was
-  decomp: *
-    reasmb: Warum fragst du ?
-    reasmb: Interessiert dich diese Frage ?
-    reasmb: Was wolltest du wirklich wissen ?
-    reasmb: Denkst du haeufig ueber solche Fragen nach ?
-    reasmb: Welche Antwort wuerde dir am besten gefallen ?
-    reasmb: Was denkst du ?
-    reasmb: Was kommt dir in den Sinn, wenn du das fragst ?
-    reasmb: Hast du solche Fragen schon mal gestellt ?
-    reasmb: Hast du schon jemand anderen gefragt ?
+  decomp: * ?
+    reasmb: Warum fragst du ? <no_trigger>
+    reasmb: Interessiert dich diese Frage ? <no_trigger>
+    reasmb: Was wolltest du wirklich wissen ? <no_trigger>
+    reasmb: Denkst du haeufig ueber solche Fragen nach ? <no_trigger>
+    reasmb: Welche Antwort wuerde dir am besten gefallen ? <no_trigger>
+    reasmb: Was denkst du ? <no_trigger>
+    reasmb: Was kommt dir in den Sinn, wenn du das fragst ? <no_trigger>
+    reasmb: Hast du solche Fragen schon mal gestellt ? <no_trigger>
+    reasmb: Hast du schon jemand anderen gefragt ? <no_trigger>
 key: weil
   decomp: *
     reasmb: Ist das der wirkliche Grund ?
@@ -462,39 +484,47 @@ key: weil
     reasmb: Welche anderen Gruende koennte es geben ?
 key: warum
   decomp: * warum * du nicht * ?
-    reasmb: Glaubst du ich (2) nicht ?
-    reasmb: Vielleicht werde ich beizeiten (2).
-    reasmb: Solltest du selbst (2) ?
-    reasmb: Du willst, dass ich (2) ?
+    reasmb: Glaubst du das nicht ?
+    reasmb: Vielleicht werde ich das beizeiten.
+    reasmb: Solltest du das vielleicht selbst ?
+    reasmb: Willst du das ?
     reasmb: goto was
   decomp: * warum kann ich nicht *
-    reasmb: Denkst du du solltest (2) koennen ?
-    reasmb: Moechtest du (2) koennen ?
-    reasmb: Glaubst du, das wird dir helfen zu (2) ?
-    reasmb: Hast du irgendeine Idee warum du nicht (2) kannst ?
+    reasmb: Denkst du du solltest (2) koennen ? <no_trigger>
+    reasmb: Moechtest du (2) koennen ? <no_trigger>
+    reasmb: Glaubst du, das wird dir helfen zu (2) ? <no_trigger>
+    reasmb: Hast du irgendeine Idee warum du nicht (2) kannst ? <no_trigger>
     reasmb: goto was
   decomp: *
     reasmb: goto was
 key: alle 2
   decomp: * @alle *
-    reasmb: Wirklich, (2) ?
-    reasmb: Sicherlich nicht .
-    reasmb: Faellt dir jemand bestimmtes ein ?
-    reasmb: Wer, zum Beispiel ?
-    reasmb: Denkst du da an eine bestimmte Person ?
-    reasmb: Wer, wenn ich fragen darf ?
-    reasmb: Jemand bestimmtes vielleicht ?
-    reasmb: Du denkst an eine bestimmte Person, oder ?
-    reasmb: Was denkst du ueber wen du genau redest ?
+    reasmb: Wirklich, (2) ? <no_pos_trigger>
+    reasmb: Sicherlich nicht . <no_pos_trigger>
+    reasmb: Faellt dir jemand bestimmtes ein ? <no_pos_trigger>
+    reasmb: Wer, zum Beispiel ? <no_pos_trigger>
+    reasmb: Denkst du da an eine bestimmte Person ? <no_pos_trigger>
+    reasmb: Wer, wenn ich fragen darf ? <no_pos_trigger>
+    reasmb: Jemand bestimmtes vielleicht ? <no_pos_trigger>
+    reasmb: Du denkst an eine bestimmte Person, oder ? <no_pos_trigger>
+    reasmb: Was denkst du ueber wen du genau redest ? <no_pos_trigger>
 key: jeder 2
   decomp: *
     reasmb: goto alle
 key: niemand 2
-  decomp: *
-    reasmb: goto alle
+  decomp: * @alle *
+    reasmb: Wirklich, (2) ? <switch> <no_pos_trigger>
+    reasmb: Sicherlich nicht . <switch> <no_pos_trigger>
+    reasmb: Faellt dir jemand bestimmtes ein ? <switch> <no_pos_trigger>
+    reasmb: Wer, zum Beispiel ? <switch> <no_pos_trigger>
+    reasmb: Denkst du da an eine bestimmte Person ? <switch> <no_pos_trigger>
+    reasmb: Wer, wenn ich fragen darf ? <switch> <no_pos_trigger>
+    reasmb: Jemand bestimmtes vielleicht ? <switch> <no_pos_trigger>
+    reasmb: Du denkst an eine bestimmte Person, oder ? <switch> <no_pos_trigger>
+    reasmb: Was denkst du ueber wen du genau redest ? <switch> <no_pos_trigger>
 key: keiner 2
   decomp: *
-    reasmb: goto alle
+    reasmb: goto niemand
 key: immer 1
   decomp: *
     reasmb: Faellt dir ein bestimmtes Beispiel ein ?

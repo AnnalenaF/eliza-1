@@ -20,9 +20,46 @@ Aufgabe 2
   und <emotion> kann im Python code dynamisch durch einen random Wert ersetzt werden
 
 Aufgabe 3
-1. höherer Grad an Immersion; Gefühle werden gespiegelt, Antworten passen besser?
-2.
-3.
-4. neuer Tag 'emotionTrigger' > Wörter die gewisse Emotionen in Eliza hervorrufen, kombiniert mit Impuls
-5. Frage nach Gemüt kann "richtig" beantwortet werden; rasmb rules haben auch emotionen zugeordnet > zuerst die mit emotion dann die anderen; 
-   Stimmung bei Konversation mit "das macht mich XY" mitteilen o.ä. (nur wenn sich emotion geändert hat?)
+1. Was könnte es dem Nutzer des ELIZA-Systems nützen, wenn dieses über eine eigene Emotionalität
+als Reaktion auf seine Texteingaben verfügt?
+Durch die Integration einer Emotionalität wird ein höherer Grad an Immersion erreicht. Der Eindruck von Empathie und Menschlichkeit wird durch die erweiterte Kommunikation verstärkt.
+Dadurch neigen die Nutzer des Systems eher dazu sich Emotional zu öffnen und auf die "Therapie" durch das ELIZA System einzulassen.
+Ebenfalls kann durch die Spiegelung von Emotionen besser auf die Eingaben des Benutzers eingegangen, sowie bessere Antworten generiert werden.
+
+2. Welche negativen Auswirkungen auf die HCI könnte eine Anbindung von WASABI haben und wie könnten diese systemisch vermieden werden?
+Da Emotionen, sowie die Verarbeitung von Sprache und darin enthaltener Emotionen sehr komplexe menschliche Aspekte sind, die schwer in ihrer Gänze zu simulieren sind
+besteht die Gefahr den Grad an Immersion durch Fehlinterpretationen und daraus resultierendem Fehlverhalten zu reduzieren.
+Durch unendliche Kombinationsmöglichkeit, Kommunikationsmuster wie Sarkasmus und ähnliche dialektbedingte Sprachunterschiede sind nahezu unendlich viele Eingaben möglich,
+die vom System korrekt in Emotionstrigger übersetzt werden müssten. Dies erfordert, um alle Emotionen korrekt zuordnen zu können ein ebenso nahezu unendlich großes Dictionary.
+Dieses zu Erstellen ist nicht möglich. Eine Möglichkeit dem entgegenzuwirken ist die Anwendung eines Machine-Learning-Algorithmus.
+Ist eine eigene Emotionalität des Systems vorhanden könnte außerdem ein Konflikt zwischen dem Benutzer und dem System auftreten, wodurch sich der Fokus der Unterhaltung
+auf die Auflösung der emotionalen Spannung legt, und das therapeutische Gespräch in den Hintergrund rückt.
+
+Systemisch lassen sich Fehlinterpretationen nie in Gänze vermeiden, ihnen kann nur durch kontinuierliche Weiterentwicklung und möglicherweise Anbindung weiterer künstlicher Intelligenzen entgegengewirkt werden.
+Eine Konfliktsituation löst sich bei sich nicht wiederholenden negativen Impulsen durch die eingebaute WASABI Emotionsdynamik nach kurzer Zeit auf,
+da sie den emotionalen Zustand des Systems kontinuierlich normalisiert.
+Ebenso kann durch die gezielte Wahl der Sprache Konfliktpotential reduziert werden. Emotional negativ aufgeladene Wörter können vermieden oder durch abgeschwächte Varianten ersetzt werden.
+(Beispielsweise angry anstelle von wütend mit ärgerlich übersetzen)
+
+3. Welche Ein-/Ausgabedaten zwischen dem ELIZA-System und der WASABI-Komponente müssen implementiert werden, wenn WASABI als eigenständiges C++-Programm parallel zum PythonCode ausgeführt würde?
+Ausgabe ELIZA -> Eingabe WASABI
+Emotionsimpuls zwischen -100 und 100 sowie die Dominanz. Gegebenenfalls kann hier auch die Konfiguration der Emotionsdynamik für die zu simulierende Person (Attendee) übergeben werden.
+Ausgabe WASABI -> Eingabe ELIZA
+Entweder: Tripel an Werten als Repräsentation der aktuellen Position im PAD-Space
+Oder: Die aktuelle Emotion repräsentiert durch ein Wort
+
+4. Wie werden im Python-Code sinnvoll Emotionsimpulse aus den Interaktionsdaten abgeleitet, die dann als Eingabedaten für die Emotionsdynamik an WASABI geschickt werden können?
+neuer Tag 'emotionTrigger' > Wörter die gewisse Emotionen in Eliza hervorrufen, kombiniert mit Impuls
+Durch das Anlegen eines neuen Tags 'emotionTrigger' können Emotionsimpulse aus Wörtern abgeleitet werden.
+Der Tag emotionTrigger ist dabei die Verbindung eines Wortes mit einem spezifischen, dem Wort zugeordneten Emotionsimpuls.
+Dieser liegt zwischen -100 für besonders negative und +100 für besonders positive Werte.
+TODO: Hier noch den Code durchgehen und nötiges Ergänzen
+
+5. Wie nutzt der Python-ELIZA-Code die von WASABI erzeugten Emotionen, um die Antworten systematisch und sinnvoll zu modifizieren? (Nennen Sie hier mindestens zwei Alternativen.)
+Zuallererst kann die Frage nach dem aktuellen Gemütszustand korrekt beantwortet werden.
+Ändert sich der Gemütszustand von ELIZA durch eine Eingabe des Benutzers, kann diese Änderung in der Antwort mitgeteilt werden. (Das stimmt mich <Emotion>)
+Wird ein Emotionsimpuls gesendet, löst jedoch keine Änderung der empfundenen Emotion aus, kann dies dennoch dem Benutzer mitgeteilt werden. (Ich bin immernoch <Emotion>)
+Ein Emotionsimpuls kann durch bestimmte Triggerworte (z.B. doof, huebsch) ausgelöst werden, sowie durch bestimmte Reassembly Rules.
+
+Eine andere Möglichkeit besteht darin Reassembly Rules einen Emotionswert zuzuordnen und sie gemäß des Gemütszustandes von ELIZA auszuwählen.
+TODO: was du schaffst

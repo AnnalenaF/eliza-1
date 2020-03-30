@@ -145,6 +145,12 @@ class Eliza:
             else:
                 output.append('Nein,')
 
+        # when user says sorry, an angry state is improved by a positive impulse
+        if '<sorry>' in reasmb:
+            current_emotion = self.emotion()
+            if current_emotion == 'aergerlich' or current_emotion == 'genervt':
+                self.send_impulse(50)
+
         # send emotional impulse and dominance attached to a reassembly rule
         if '<impulse>' in reasmb:
             impulse = reasmb[len(reasmb) - 1]
@@ -155,7 +161,8 @@ class Eliza:
             output_append = self.send_impulse(float(impulse[0]), float(impulse[1]))
         for reword in reasmb:
             if (not reword or reword == '<emotion_response>' or reword == '<impulse>'
-                    or reword.startswith('[')):
+                    or reword == '<sorry>' or reword.startswith('<no_') or reword.startswith('[')
+                    or reword == '<switch>'):
                 continue
             if reword[0] == '(' and reword[-1] == ')':
                 index = int(reword[1:-1])
@@ -208,16 +215,31 @@ class Eliza:
                 return self._match_key(words, self.keys[goto_key])
             output = self._reassemble(reasmb, results)
 
-            # retrieve emotional triggers from input
-            emotional_triggers = [w.lower() for w in words if w.lower() in self.emotion_triggers]
-            log.debug('Emotional Triggers: %s', [(t[0], t[1]) for t in emotional_triggers])
+            if '<no_trigger>' not in reasmb:
+                # retrieve emotional triggers
+                emotion_triggers = [w.lower() for w in words if w.lower() in self.emotion_triggers]
+                log.debug('Emotional Triggers: %s', [(t[0], t[1]) for t in emotion_triggers])
 
-            # accumulate and send emotional impulses
-            impulse = 0
-            for trigger in emotional_triggers:
-                impulse = impulse + float(self.emotion_triggers[trigger][1])
-            if impulse:
-                output.append(self.send_impulse(impulse))
+                # accumulate and send emotional impulses
+                impulse = 0
+                for trigger in emotion_triggers:
+                    new_impulse = float(self.emotion_triggers[trigger][1])
+
+                    # if trigger is negated, switch its effect
+                    index_trigger = words.index(self.emotion_triggers[trigger][0])
+                    if words[index_trigger - 1] == 'nicht' or '<switch>' in reasmb:
+                        new_impulse *= -1
+
+                    if ('<no_pos_trigger>' in reasmb and new_impulse > 0):
+                        # no positive impulses permitted
+                        continue
+                    elif '<no_neg_trigger>' in reasmb and new_impulse < 0:
+                        # no negative impulses permitted
+                        continue
+
+                    impulse += new_impulse
+                if impulse:
+                    output.append(self.send_impulse(impulse))
 
            # FOR TESTING: always tell current emotional state
            # else:
@@ -292,9 +314,19 @@ class Eliza:
         emotion_after_impulse = self.emotion()
         # tell user emotional state after impulse
         if emotion_after_impulse != emotion_before_impulse:  # emotion changed after impulse
-            output = 'Das stimmt mich ' + self.emotion()
+            if emotion_after_impulse == 'aengstlich':
+                output = 'Das beunruhigt mich'
+            elif emotion_after_impulse == 'froehlich':
+                output = 'Das freut mich'
+            else:
+                output = 'Das stimmt mich ' + self.emotion()
         else:  # emotion has not changed
-            output = 'Ich bin immer noch ' + emotion_before_impulse
+            if emotion_before_impulse == 'aengstlich':
+                output = 'Ich bin immer noch beunruhigt'
+            elif emotion_after_impulse == 'froehlich':
+                output: 'Ich bin immer noch erfreut'
+            else:
+                output = 'Ich bin immer noch ' + emotion_before_impulse
         return output
 
     def run(self):
