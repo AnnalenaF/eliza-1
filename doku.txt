@@ -65,3 +65,4 @@ und dementsprechende Logik durchgeführt werden. Diese Tags können für viele Z
 - Ändert sich der Gemütszustand von ELIZA durch eine Eingabe des Benutzers, kann diese Änderung in der Antwort mitgeteilt werden. (z.B.: Das stimmt mich <emotion>)
 - Wird ein Emotionsimpuls gesendet, löst jedoch keine Änderung der empfundenen Emotion aus, kann dies auch dem Benutzer mitgeteilt werden. (z.B.: Ich bin immernoch <emotion>)
 - Eine andere Möglichkeit besteht darin, Reassembly Rules einen Emotionswert zuzuordnen und sie gemäß des Gemütszustandes von ELIZA auszuwählen.
+- Außerdem könnte eine gelangweilte ELIZA (aufgrund fehlenden Inputs) die Kommunikation wieder anregen
